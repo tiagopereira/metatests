@@ -1,20 +1,20 @@
 ---
 telescope: SST
 instrument:
-    - CRISP
+    CRISP:
       program:
-          - Spicules A:
-              - config_A:
+          Spicules A:
+              config_A:
                   positions:  [6301, 8542, 6563]
                   lre: [18028, 24002, 24322]
                   hre: [19426, 23006, 24109]
-    - CHROMIS
+    CHROMIS:
       program:
-          - Scan_RBE_A_70:
-            - config_A:
-                positions: [Ca II K core, Ca II H core, Ca II H rwing, Ca II continuum]
-                lrz: [40646, 40529, 41103, 40272]
-                hrz: [33574, 33713, 33463, 32938]
+          Scan_RBE_A_70:
+              config_A:
+                  positions: ['Ca II K core', 'Ca II H core', 'Ca II H rwing', 'Ca II continuum']
+                  lrz: [40646, 40529, 41103, 40272]
+                  hrz: [33574, 33713, 33463, 32938]
 observers:
     - Tiago Pereira
     - Luc Rouppe van der Voort
