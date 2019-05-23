@@ -1,7 +1,4 @@
-#ASDF 1.0.0
-#ASDF_STANDARD 1.2.0
 %YAML 1.1
-#%TAG ! tag:stsci.edu:asdf/
 ---
 telescope: SST
 instrument:
@@ -98,7 +95,5 @@ data_science:
           start: 2019-05-22T10:27:12Z
       target: Quiet Sun Limb
       target_PIG_coordinates: [2, 945]
-
-
 
 ...
