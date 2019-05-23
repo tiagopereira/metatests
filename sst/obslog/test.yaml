@@ -1,22 +1,104 @@
 #ASDF 1.0.0
 #ASDF_STANDARD 1.2.0
 %YAML 1.1
-%TAG ! tag:stsci.edu:asdf/
---- !core/asdf-1.1.0
+#%TAG ! tag:stsci.edu:asdf/
+---
 telescope: SST
 instrument:
     CRISP:
-        config_A:
-            positions:  [6301, 8542, 6563]
-            lre: [18028, 24002, 24322]
-            hre: [19426, 23006, 24109]
+        - &calib_A_CRISP
+          positions:  [6301, 8542, 6563]
+          lre: [18028, 24002, 24322]
+          hre: [19426, 23006, 24109]
+          date_calibrated: 2019-05-22T07:27:12Z
+        - &calib_B_CRISP
+          positions:  [6301, 8542, 6563]
+          lre: [18027, 24001, 24325]
+          hre: [19427, 23003, 24112]
+          date_calibrated: 2019-05-22T12:22:04Z
     CHROMIS:
-        config_A:
-            positions: ['Ca II K core', 'Ca II H core', 'Ca II H rwing', 'Ca II continuum']
-            lrz: [40646, 40529, 41103, 40272]
-            hrz: [33574, 33713, 33463, 32938]
+        - &calib_A_CHROMIS
+          positions: ['Ca II K core', 'Ca II H core', 'Ca II H rwing', 'Ca II continuum']
+          lrz: [40646, 40529, 41103, 40272]
+          hrz: [33574, 33713, 33463, 32938]
+          date_calibrated: 2019-05-22T20:27:12Z
 observers:
     - Tiago Pereira
     - Luc Rouppe van der Voort
 date: 2019-05-22
+
+data_darks:
+    CRISP:
+        - &CRISP_darks1
+          sequence_name: CRISP darks
+          start: 11:20:21
+        - &CRISP_darks2 {sequence_name: 'CRISP darks', start: 19:10:01}
+    CHROMIS:
+        - &CHROMIS_darks1
+          sequence_name: CHROMIS darks
+          start: 11:20:40
+
+data_flats:
+    CRISP:
+        - &CRISP_SpicA_flats1
+          sequence_name: Spicule A Flats
+          start: 11:30:01
+        - &CRISP_WB_flats1
+          sequence_name: CRISP WB Flats
+          start: 11:50:11
+        - &CRISP_SpicLimb_flats1
+          sequence_name: Spicule Limb Flats
+          start: 14:05:20
+    CHROMIS:
+        - &CHROMIS_flats1
+          sequence_name: CHROMIS Flats
+          start: 11:30:23
+        - &CHROMIS_WB_flats1
+          sequence_name: CHROMIS WB Flats
+          start: 11:50:23
+
+data_science:
+    - CRISP:
+          start: 10:41:27
+          end:   11:01:23
+          sequence_name: spicules_A
+          calibration: *calib_A_CRISP
+          flats: [*CRISP_SpicA_flats1, *CRISP_WB_flats1]
+          darks: *CRISP_darks1
+          pinholes:
+          polcal:
+      IRIS:
+          OBSID: 3633105426
+          coordinates: [-10, 945]
+          start: 2019-05-22T10:27:12Z
+      target: Quiet Sun Limb
+      target_PIG_coordinates: [0, 940]
+
+    - CRISP:
+          start: 11:59:27
+          end:   12:41:23
+          sequence_name: spicules_A
+          calibration: *calib_A_CRISP
+          flats: [*CRISP_SpicA_flats1, *CRISP_WB_flats1]
+          darks: *CRISP_darks1
+          pinholes:
+          polcal:
+      CHROMIS:
+          start: 12:15:27
+          end:   12:30:10
+          sequence_name: Scan_Spicules_A_70
+          calibration: *calib_A_CRISP
+          flats: [*CHROMIS_flats1, CHROMIS_WB_flats1]
+          darks: *CHROMIS_darks1
+          pinholes:
+          polcal:
+      IRIS:
+          OBSID: 3633105426
+          coordinates: [-10, 945]
+          start: 2019-05-22T10:27:12Z
+      target: Quiet Sun Limb
+      target_PIG_coordinates: [2, 945]
+
+
+
 ...
