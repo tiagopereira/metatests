@@ -1,0 +1,150 @@
+%YAML 1.1
+---
+telescope: Swedish 1-meter Solar Telescope
+origin: Institute of Theoretical Astrophysics
+target: Sun
+observer:
+    - Tiago Pereira
+    - Luc Rouppe van der Voort
+date: 2019-05-22
+
+instrument:
+    CRISP:
+        cameras: [Crisp-R, Crisp-T, Crisp-W]
+        camera_detectors: [camXIX, camXXV, camXX]
+        camera_computers: [camera1, camera2, camera3]
+        sequences: [AR_QS, RBE, INVERSIONS]
+        calibration:
+            - &CRISP_calib1
+              positions:  [6301, 8542, 6563]
+              lre: [18028, 24002, 24322]
+              hre: [19426, 23006, 24109]
+              date_calibrated: 2019-05-22T07:27:12Z
+              PIG_coordinates: [0, 0]
+            - &CRISP_calib2
+              positions:  [6301, 8542, 6563]
+              lre: [18027, 24001, 24325]
+              hre: [19427, 23003, 24112]
+              date_calibrated: 2019-05-22T12:22:04Z
+              PIG_coordinates: [40, 840]
+    CHROMIS:
+        cameras: [Chromis-D, Chromis-N, Chromis-W]
+        camera_detectors: [camXXVII, camXXX, XXVIII]
+        camera_computers: [camera6, camera7, camera8]
+        sequences: [H-beta, H-beta_fast, Ca-II-K]
+        calibration:
+            - &CHROMIS_calib1
+              positions: ['Ca II K core', 'Ca II H core', 'Ca II H rwing', 'Ca II continuum']
+              lrz: [40646, 40529, 41103, 40272]
+              hrz: [33574, 33713, 33463, 32938]
+              date_calibrated: 2019-05-22T23:27:12Z
+
+darks:
+    CRISP:
+        - &CRISP_darks1
+          sequence_name: CRISP darks
+          start: 11:20:21
+        - &CRISP_darks2
+          sequence_name: CRISP darks
+          start: 19:09:12
+    CHROMIS:
+        - &CHROMIS_darks1
+          sequence_name: CHROMIS darks
+          start: 11:20:40
+
+flats:
+    CRISP:
+        - &CRISP_SpicA_flats1
+          sequence_name: Spicule A Flats
+          start: 11:30:01
+        - &CRISP_WB_flats1
+          sequence_name: CRISP WB Flats
+          start: 11:50:11
+        - &CRISP_SpicLimb_flats1
+          sequence_name: Spicule Limb Flats
+          start: 14:05:20
+    CHROMIS:
+        - &CHROMIS_flats1
+          sequence_name: CHROMIS Flats
+          start: 11:30:23
+        - &CHROMIS_WB_flats1
+          sequence_name: CHROMIS WB Flats
+          start: 11:50:23
+
+pinholes:
+    CRISP:
+        - &CRISP_Halpha_pinholes1 {sequence_name: 6563 pinholes, start: 16:20:21}
+        - &CRISP_8542_pinholes1 {sequence_name: 8542 pinholes, start: 16:39:12}
+    CHROMIS:
+        - &CHROMIS_pinholes1 {sequence_name: CHROMIS pinholes, start: 11:20:40}
+
+data:
+    - date_start: 2019-05-22T10:41:27Z  # These define the maximum extent of
+      date_end:   2019-05-22T11:01:23Z  # the data set (any SST instrument observing)
+      target:
+          region: Quiet Sun
+          description: Very weak network with a few bright points in Ca II K
+          PIG_coordinates: [0, 120]
+      comment: >
+          A mediocre quality detaset with some good peaks. Could be useful for
+          single snapshots. Did not switch on CHROMIS because of poor seeing.
+          The field was very quiet, alignment with IRIS will be difficult.
+      quality:
+          r0_times: [0.60366, 1.60325, 2.60285, ...]
+          r0_values: [10.1, 5.5, 10.0, ...]
+          comment: >
+            The seeing was very spotty. Some peaks with r0 above 30 cm,
+            but for the most part it was well below 10. The best part is
+            between 10:45 to 10:50.
+      CRISP:
+          - start: 10:41:27
+            end:   11:01:23
+            sequence_name: AR_QS
+            calibration: *CRISP_calib1
+            flats: [*CRISP_SpicA_flats1, *CRISP_WB_flats1]
+            darks: *CRISP_darks1
+            pinholes: [*CRISP_Halpha_pinholes1, *CRISP_8542_pinholes1]
+            polcal:
+
+    - date_start: 2019-05-22T11:59:27Z
+      date_end:   2019-05-22T13:21:23Z
+      target:
+          region: Active Region
+          description: Central sunspot in AR12794 close to limb
+          PIG_coordinates: [50, -832]
+      comment: >
+          A very nice dataset with excellent seeing. Camera3 crashed at 12:41,
+          and we had to reboot it and restart the CRISP sequence. During this
+          time the pointing was stable.
+      quality:
+          r0_times: [0.60366, 1.60325, 2.60285, ...]
+          r0_values: [20.1, 45.5, 40.0, ...]
+          comment: Excellent seeing, very good dataset.
+      CRISP:
+          - start: 11:59:27
+            end:   12:41:23
+            sequence_name: AR_QS
+            calibration: *CRISP_calib1
+            flats: [*CRISP_SpicA_flats1, *CRISP_WB_flats1]
+            darks: *CRISP_darks1
+            pinholes:
+            polcal:
+          - start: 12:45:00
+            end:   13:21:23
+            sequence_name: AR_QS
+            calibration: *CRISP_calib1
+            flats: [*CRISP_SpicA_flats1, *CRISP_WB_flats1]
+            darks: *CRISP_darks1
+            pinholes:
+            polcal:
+      CHROMIS:
+          - start: 12:15:27
+            end:   13:30:10
+            sequence_name: H-beta_fast
+            calibration: *CHROMIS_calib1
+            flats: [*CHROMIS_flats1, CHROMIS_WB_flats1]
+            darks: *CHROMIS_darks1
+            pinholes:
+            polcal:
+
+...
