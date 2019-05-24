@@ -23,3 +23,5 @@ HRE   | 19426 | 23006 | 24109
 ![r0 plot](File_R0plot_20181016_093000-100500.png)
 
 * 08:00 R0 looking good, starting observation!
+* 08:10 damn
+- he he
