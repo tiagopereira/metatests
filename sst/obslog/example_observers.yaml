@@ -79,9 +79,11 @@ flats:
         - &CHROMIS_flats1
           sequence_name: CHROMIS Flats
           start: 11:30:23
+          repeats: 20
         - &CHROMIS_WB_flats1
           sequence_name: CHROMIS WB Flats
           start: 11:50:23
+          repeats: 20
 
 pinholes:
     CRISP:
